@@ -1,3 +1,0 @@
-/home/syamprasadkr/opencv_ws/opencv_examples/edge_detectors/CMakeFiles/edit_cache.dir
-/home/syamprasadkr/opencv_ws/opencv_examples/edge_detectors/CMakeFiles/rebuild_cache.dir
-/home/syamprasadkr/opencv_ws/opencv_examples/edge_detectors/CMakeFiles/edge_detectors.dir
