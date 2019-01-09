@@ -5,10 +5,26 @@
 
 int main(int argc, char** argv)
 {
+	// Different Mat objects for various sources and results
 	cv::Mat src, src_gblur, src_gray;
 	cv::Mat grad, grad_x, grad_y, abs_grad_x, abs_grad_y;
 	cv::Mat laplacian, abs_laplacian;
 	cv::Mat canny;
+	// Output image depth
+	int ddepth = CV_16S;
+	// Scale factor multiplied to values computed by the filter
+	int scale = 1;
+	// Delta value added to the results from the filter
+	int delta = 0;
+	// Read the input file and return an error if it has no data
+	src = cv::imread(argv[1]);
+	if(!src.data)
+	{
+		std::cout << "Invalid File\n";
+		return -1;
+	}
+
+	// Different windows to display various results 
 	std::string win0 = "Original Image";
 	std::string win0gb = "Gaussian Blur";
 	std::string win0g = "Grayscale Image";
@@ -17,39 +33,34 @@ int main(int argc, char** argv)
 	std::string win3 = "Sobel Gy";
 	std::string win4 = "LoG";
 	std::string win5 = "Canny";
-	int ddepth = CV_16S;
-	int scale = 1;
-	int delta = 0;
-	src = cv::imread(argv[1]);
-	if(!src.data)
-	{
-		std::cout << "Invalid File\n";
-		return -1;
-	}
-	
-	cv::namedWindow(win0, CV_WINDOW_AUTOSIZE);
-	cv::namedWindow(win0gb, CV_WINDOW_AUTOSIZE);
-	cv::namedWindow(win0g, CV_WINDOW_AUTOSIZE);
-	cv::namedWindow(win1, CV_WINDOW_AUTOSIZE);
-	cv::namedWindow(win2, CV_WINDOW_AUTOSIZE);
-	cv::namedWindow(win3, CV_WINDOW_AUTOSIZE);
-	cv::namedWindow(win4, CV_WINDOW_AUTOSIZE);
-	cv::namedWindow(win5, CV_WINDOW_AUTOSIZE);
+	cv::namedWindow(win0, cv::WindowFlags::WINDOW_AUTOSIZE);
+	cv::namedWindow(win0gb, cv::WindowFlags::WINDOW_AUTOSIZE);
+	cv::namedWindow(win0g, cv::WindowFlags::WINDOW_AUTOSIZE);
+	cv::namedWindow(win1, cv::WindowFlags::WINDOW_AUTOSIZE);
+	cv::namedWindow(win2, cv::WindowFlags::WINDOW_AUTOSIZE);
+	cv::namedWindow(win3, cv::WindowFlags::WINDOW_AUTOSIZE);
+	cv::namedWindow(win4, cv::WindowFlags::WINDOW_AUTOSIZE);
+	cv::namedWindow(win5, cv::WindowFlags::WINDOW_AUTOSIZE);
+
+	// Smoothing with Gaussian and conversion to Grayscale image
 	cv::GaussianBlur(src, src_gblur, cv::Size(3, 3), 0, 0, cv::BORDER_DEFAULT);
-	cv::cvtColor(src_gblur, src_gray, CV_BGR2GRAY);
+	cv::cvtColor(src_gblur, src_gray, cv::COLOR_BGR2GRAY);
 	
-	
+	// Sobel Edge Detector
 	cv::Sobel(src_gray, grad_x, ddepth, 1, 0, 3, scale, delta, cv::BORDER_DEFAULT);
 	cv::convertScaleAbs(grad_x, abs_grad_x);
 	cv::Sobel(src_gray, grad_y, ddepth, 0, 1, 3, scale, delta, cv::BORDER_DEFAULT);
 	cv::convertScaleAbs(grad_y, abs_grad_y);
 	cv::addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, grad);
 
+	// Laplacian Edge Detector
 	cv::Laplacian(src_gray, laplacian, ddepth, 3, scale, delta, cv::BORDER_DEFAULT);
 	cv::convertScaleAbs(laplacian, abs_laplacian);
 
+	// Canny Edge Detector
 	cv::Canny(src_gray, canny, 30, 150, 3);
 
+	// Display various sources and results
 	cv::imshow(win0, src);
 	cv::imshow(win0gb, src_gblur);
 	cv::imshow(win0g, src_gray);
