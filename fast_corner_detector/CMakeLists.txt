@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project(fast_corner_detector)
+set(CMAKE_CXX_STANDARD 11)
+find_package(OpenCV REQUIRED)
+set(SOURCES fast_corner_detector.cpp)
+add_executable(fast_corner_detector ${SOURCES})
+target_link_libraries(fast_corner_detector ${OpenCV_LIBS})
