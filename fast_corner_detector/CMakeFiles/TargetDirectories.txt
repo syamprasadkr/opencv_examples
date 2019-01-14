@@ -1,3 +1,0 @@
-/home/syamprasadkr/opencv_ws/opencv_examples/fast_corner_detector/CMakeFiles/edit_cache.dir
-/home/syamprasadkr/opencv_ws/opencv_examples/fast_corner_detector/CMakeFiles/rebuild_cache.dir
-/home/syamprasadkr/opencv_ws/opencv_examples/fast_corner_detector/CMakeFiles/fast_corner_detector.dir
