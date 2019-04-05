@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.5)
+project(orb_demo)
+set(CMAKE_CXX_STANDARD 11)
+find_package(OpenCV REQUIRED)
+add_executable( orb_demo orb_demo.cpp )
+target_link_libraries( orb_demo ${OpenCV_LIBS} )
