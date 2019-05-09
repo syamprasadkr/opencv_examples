@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project(illuminationCor)
+set(CMAKE_CXX_STANDARD 11)
+find_package(OpenCV REQUIRED)
+set(SOURCES illuminationCor.cpp)
+add_executable(illuminationCor ${SOURCES})
+target_link_libraries(illuminationCor ${OpenCV_LIBS})
