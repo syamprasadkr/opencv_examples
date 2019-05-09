@@ -1,3 +1,15 @@
+/*
+
+This is a simple code that uses mean and variance to correct brightness and contrast. The idea was obtained from: 
+
+Bouguet, Jean-Yves. "Pyramidal implementation of the affine 
+lucas kanade feature tracker description of the algorithm." Intel Corporation 5.1-10 (2001): 4.
+
+Author: Syamprasad K Rajagopalan
+Date: May 09, 2019
+
+*/
+
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
