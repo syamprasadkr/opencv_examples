@@ -18,7 +18,7 @@ int main()
 	std::vector<cv::KeyPoint> corners;
 	int thresh = 35;
 	bool non_max_suppression = true;
-	int type = cv::FastFeatureDetector::TYPE_9_16;
+	auto type = cv::FastFeatureDetector::TYPE_9_16;
 	// Create FAST Feature Detector
 	auto fast_detector = cv::FastFeatureDetector::create(thresh, non_max_suppression, type);
 	std::string win0 = "FAST Corner Detector";
